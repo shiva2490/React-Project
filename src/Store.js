@@ -16,7 +16,7 @@ const productsSlice = createSlice({
             { name: 'MushRoom', price: 150.8 ,image:"public/mushroom.jpg"}
         ],
         nonVeg: [
-            { name: 'chicken-65', price: 200.5 ,image:"src/Chicken-65.jpg"},
+            { name: 'chicken-65', price: 200.5 ,image:"https://react-repository-liard.vercel.app/Chicken-65.jpg"},
             { name: 'Fish-Fry', price: 100.8 ,image:"public/fishfry.jpeg"},
             { name: 'Biryani', price: 150.8 ,image:"public/biryani.jpg"},
             { name: 'Chicken-lolipop', price: 150.8 ,image:"public/chickenlolipop.jpeg"},
