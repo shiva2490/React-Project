@@ -156,28 +156,115 @@ input {
     padding: 15px;
   }
 }
-/* App.css or your component's CSS file */.container.food-grid { /* Assuming you have a div with class "food-grid" wrapping your items */
+/* App.css */
+
+/* General Styles */
+body {
+  font-family: sans-serif; /* Or your preferred font */
+}
+
+.container {
+  padding: 1rem; /* Consistent padding for the main content */
+}
+
+/* Navbar Styles */
+.navbar {
+  /* ... your existing navbar styles ... */
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  margin: 0 0.5rem; /* Spacing between nav links */
+  color: #fff !important; /* Ensure text is white */
+}
+
+.navbar-toggler {
+  border: none; /* Remove default border */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* White toggler icon */
+}
+
+/* Mobile Styles (Media Query) */
+@media (max-width: 768px) {
+  .navbar-nav {
+      text-align: center; /* Center the links on mobile */
+  }
+
+  .navbar-nav .nav-link {
+      display: block; /* Stack links vertically */
+      margin: 0.5rem 0; /* Add vertical margin */
+      padding: 0.5rem; /* Add some padding around text */
+      border-bottom: 1px solid #444; /* Add a separator line */
+  }
+
+  .navbar-collapse {
+      background-color: #343a40; /* Match the navbar background */
+      padding: 10px; /* Add padding inside the menu */
+      border-top: 1px solid #444; /* Add a separator line */
+  }
+
+  .navbar-toggler {
+      margin-right: 10px; /* Add some right margin to the toggler */
+  }
+
+  .navbar-text {
+      display: block; /* Make the user text a block element */
+      margin: 10px 0; /* Add margin to the user text */
+  }
+
+  .btn-danger, .btn-success {
+      display: block; /* Make buttons block elements */
+      width: 100%; /* Make buttons take full width */
+      margin: 5px 0; /* Add margin to the buttons */
+  }
+
+  /* Styles for the container holding filter buttons */
+  .filter-buttons-container {
+      display: flex;
+      flex-direction: column; /* Stack buttons vertically */
+      align-items: center; /* Center horizontally */
+      margin-bottom: 20px; /* Space below the buttons */
+  }
+
+  .filter-buttons-container .btn {
+      margin: 5px 0; /* Space between buttons */
+      width: 100%; /* Make buttons take full width */
+  }
+}
+
+
+/* Food Grid Styles */
+.food-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
-  gap: 1rem; /* Adjust spacing as needed */
-}.food-item { /* Style individual food items */
+  gap: 1rem;
+}
+
+.food-item {
   border: 1px solid #ccc;
   padding: 1rem;
-  text-align: center; /* Center content */
-}.food-item img {
-  max-width: 100%; /* Make images responsive */
+  text-align: center;
+}
+
+.food-item img {
+  max-width: 100%;
   height: auto;
   margin-bottom: 0.5rem;
 }
 
-/* Media query for smaller screens (mobile) */
+/* Media Query for smaller screens (mobile) */
 @media (max-width: 768px) {
-.container.food-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust column width for smaller screens */
-    gap: 0.5rem; /* Reduce spacing on smaller screens */
+  .food-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust column width for smaller screens */
+      gap: 0.5rem; /* Reduce spacing on smaller screens */
   }
 
-.food-item {
-    padding: 0.5rem; /* Reduce padding on smaller screens */
+  .food-item {
+      padding: 0.5rem; /* Reduce padding on smaller screens */
   }
 }
