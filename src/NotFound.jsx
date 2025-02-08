@@ -7,7 +7,7 @@ function NotFound() {
     useEffect(() => {
         setTimeout(() => {
             navigate("/home");
-        }, 5000);
+        }, 3000);
     }, [navigate]);
 
     return (
@@ -21,7 +21,7 @@ function NotFound() {
                     style={{ maxWidth: '80%', height: 'auto' }} 
                 />
                 <p className="lead text-muted mb-3">The page you are looking for might have been moved or deleted.</p>
-                <p>You will be redirected to the home page in 5 seconds...</p>
+                <p>You will be redirected to the home page in 3 seconds...</p>
             </div>
         </div>
     );
