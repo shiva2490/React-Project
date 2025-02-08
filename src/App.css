@@ -156,84 +156,28 @@ input {
     padding: 15px;
   }
 }
-/* App.css */
-
-/* Mobile Styles (Smaller Screens) */
-@media (max-width: 767px) {
-  .container {
-    padding: 10px; /* Adjust padding as needed */
-  }
-
-  .navbar-brand {
-    font-size: 1.2rem; /* Adjust font size */
-  }
-
-  .navbar-nav .nav-link {
-    font-size: 1rem; /* Adjust font size */
-    padding: 0.5rem 1rem; /* Adjust padding for smaller screens */
-  }
-
-  .navbar-toggler {
-    margin-right: 10px; /* Adjust margin as needed */
-  }
-
-  .navbar-text {
-    font-size: 1rem; /* Adjust font size */
-  }
-
-  .btn {
-    font-size: 1rem; /* Adjust font size */
-    padding: 0.5rem 1rem; /* Adjust padding */
-  }
-
-  h1 {
-    font-size: 1.8rem; /* Adjust heading size */
-    margin-bottom: 20px;
-  }
-
-  /* Center the welcome message on smaller screens */
-  .navbar-text {
-      text-align: center;
-      width: 100%; /* Make it take the full width */
-      margin-bottom: 10px; /* Add some spacing below */
-  }
-  .d-flex {
-      flex-direction: column; /* Stack the elements vertically */
-      align-items: center; /* Center horizontally */
-  }
-  .btn-danger, .btn-success {
-      margin-top: 10px; /* Add space between buttons */
-      width: 100%; /* Make buttons full width */
-  }
+/* App.css or your component's CSS file */.container.food-grid { /* Assuming you have a div with class "food-grid" wrapping your items */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+  gap: 1rem; /* Adjust spacing as needed */
+}.food-item { /* Style individual food items */
+  border: 1px solid #ccc;
+  padding: 1rem;
+  text-align: center; /* Center content */
+}.food-item img {
+  max-width: 100%; /* Make images responsive */
+  height: auto;
+  margin-bottom: 0.5rem;
 }
 
-/* Tablet and Larger Screens */
-@media (min-width: 768px) {
-  .container {
-    padding: 20px; /* Adjust padding as needed */
+/* Media query for smaller screens (mobile) */
+@media (max-width: 768px) {
+.container.food-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust column width for smaller screens */
+    gap: 0.5rem; /* Reduce spacing on smaller screens */
   }
 
-  .navbar-brand {
-    font-size: 1.5rem; /* Adjust font size */
+.food-item {
+    padding: 0.5rem; /* Reduce padding on smaller screens */
   }
-
-  .navbar-nav .nav-link {
-    font-size: 1.1rem; /* Adjust font size */
-    padding: 0.5rem 1.5rem; /* Adjust padding */
-  }
-
-  h1 {
-    font-size: 2.5rem; /* Adjust heading size */
-    margin-bottom: 30px;
-  }
-}
-
-/* Add more specific styles as needed for your components */
-/* For example, adjust styles for .veg-item, .nonveg-item, etc. */
-
-/* Example for cart items on smaller screens */
-@media (max-width: 767px) {
-    .cart-item { /* Replace .cart-item with the actual class/selector */
-        display: block; /* Stack cart item elements vertically */
-    }
 }
