@@ -1,5 +1,5 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import { useState } from "react"; // Import useState
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Veg from "./Veg";
 import NonVeg from "./NonVeg";
@@ -12,13 +12,13 @@ import Milk from "./Milk";
 import { logout } from "./Store";
 import Login from "./Login";
 import NotFound from "./NotFound";
-import "./App.css";
+import "./App.css"; // Import your custom CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
-    const [isOpen, setIsOpen] = useState(false); // State to control navbar toggle
+    const [isOpen, setIsOpen] = useState(false);
     const cart = useSelector((state) => state.cart);
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -31,7 +31,6 @@ function App() {
                     <Link to="/home" className="navbar-brand text-light">
                         <i className="fas fa-store me-2"></i> Store
                     </Link>
-                    {/* Toggle Button */}
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -39,9 +38,8 @@ function App() {
                     >
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    
-                    {/* Navbar Links */}
-                    <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`} id="navbarNav">
+
+                    <div className={`collapse navbar-collapse justify-content-between ${isOpen ? "show" : ""}`} id="navbarNav"> {/* justify-content-between */}
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
                                 <Link to="/veg" className="nav-link text-light" onClick={() => setIsOpen(false)}>
@@ -70,7 +68,8 @@ function App() {
                             </li>
                             <li className="nav-item">
                                 <Link to="/orders" className="nav-link text-light" onClick={() => setIsOpen(false)}>
-                                    <i className="fas fa-box me-2"></i> Orders
+                                    <i className="fas fa-book me-1"></i>
+                                    <i className="fas fa-pen me-2"></i> Orders
                                 </Link>
                             </li>
                             <li className="nav-item">
@@ -84,7 +83,8 @@ function App() {
                                 </Link>
                             </li>
                         </ul>
-                        <div className="d-flex">
+
+                        <div className="d-flex align-items-center"> {/* Align items vertically */}
                             {isAuthenticated ? (
                                 <>
                                     <span className="navbar-text text-light me-3">
@@ -94,7 +94,7 @@ function App() {
                                         className="btn btn-danger"
                                         onClick={() => {
                                             dispatch(logout());
-                                            setIsOpen(false); // Close navbar on logout
+                                            setIsOpen(false);
                                         }}
                                     >
                                         <i className="fas fa-sign-out-alt me-2"></i> Logout
@@ -114,7 +114,8 @@ function App() {
                     <i className="fas fa-shopping-basket me-2"></i> Welcome to Our Store
                 </h1>
                 <Routes>
-                    <Route path="/home" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/veg" element={<Veg />} />
                     <Route path="/nonveg" element={<NonVeg />} />
                     <Route path="/milk" element={<Milk />} />
@@ -124,6 +125,7 @@ function App() {
                     <Route path="/aobus" element={<AboutUS />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="*" element={<NotFound />} />
+
                 </Routes>
             </div>
         </BrowserRouter>

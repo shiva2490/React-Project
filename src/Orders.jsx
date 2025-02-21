@@ -17,38 +17,36 @@ function Orders() {
                     <i className="fas fa-info-circle me-2"></i> No Orders Yet
                 </div>
             ) : (
-                <div className="row"> {/* Basic row */}
+                <div className="row justify-content-center"> 
                     {ordersObject.map((purchase, index) => (
-                        <div key={index} className="col-md-4 mb-4"> {/* Column for each order */}
+                        <div key={index} className="col-md-6 mb-4"> 
                             <div className="card shadow-lg border-light rounded">
+                                <div className="card-header bg-primary text-white">
+                                    <h5 className="mb-0">Order #{index + 1}</h5>
+                                </div>
                                 <div className="card-body">
-                                    <h5 className="card-title"> {/* Removed text-center */}
-                                        Order #{index + 1}
-                                    </h5>
-                                    <p> {/* Removed d-flex and align-items-center */}
+                                    <p className="mb-1">
                                         <i className="fas fa-calendar-alt me-2"></i>
-                                        Date: {purchase.date}
+                                        <strong>Date:</strong> {purchase.purchageDate}
                                     </p>
-                                    <p> {/* Removed d-flex and align-items-center */}
+                                    <p className="mb-1">
                                         <i className="fas fa-dollar-sign me-2"></i>
-                                        Total: ₹{purchase.totalAmount.toFixed(2)}
+                                        <strong>Total:</strong> ₹{purchase.totalAmount.toFixed(2)}
                                     </p>
-                                    <p> {/* Removed d-flex and align-items-center */}
-                                        <i className="fas fa-box-open me-2"></i>
-                                        Items:
-                                    </p>
-                                    <ul className="list-group"> {/* Removed flex-grow-1 */}
+                                    <hr />
+                                    <h6 className="text-muted"><i className="fas fa-box-open me-2"></i>Items:</h6>
+                                    <ul className="list-group">
                                         {purchase.items.map((item, idx) => (
-                                            <li key={idx} className="list-group-item"> {/* Removed d-flex and align-items-center */}
+                                            <li key={idx} className="list-group-item d-flex align-items-center">
                                                 <img
                                                     src={item.image}
                                                     alt={item.name}
-                                                    className="me-2 rounded"
+                                                    className="me-3 rounded"
                                                     style={{ width: '50px', height: '50px', objectFit: 'cover' }}
                                                 />
-                                                <div className="item-details"> {/* No special styling */}
-                                                    <i className="fas fa-caret-right me-2"></i>
-                                                    {item.name} - {item.quantity} x ₹{item.price}
+                                                <div>
+                                                    <strong>{item.name}</strong>
+                                                    <p className="mb-0 text-muted">{item.quantity} x ₹{item.price}</p>
                                                 </div>
                                             </li>
                                         ))}
