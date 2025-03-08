@@ -7,20 +7,20 @@ const productsSlice = createSlice({
     initialState: {
         veg: [
             { name: 'MushRoom', price: 150.8 ,image:"https://tse3.mm.bing.net/th?id=OIP.M4vr-t_PxdlTvg6zdVHbDQHaE9&pid=Api&P=0&h=180"},
-            { name: 'Tomato', price: 200.5 ,image: "https://tse3.mm.bing.net/th?id=OIP.VLq0kRvM53MGoT7XMmwLOwHaE8&pid=Api&P=0&h=180" },
+            { name: 'Tomato', price: 100.5 ,image: "https://tse3.mm.bing.net/th?id=OIP.VLq0kRvM53MGoT7XMmwLOwHaE8&pid=Api&P=0&h=180" },
             { name: 'Potato', price: 100.8 , image:"https://tse3.mm.bing.net/th?id=OIP.xdxwjQ_mSva9hgccLToezgHaE9&pid=Api&P=0&h=180"},
             { name: 'Carrot', price: 150.8 , image:"https://tse3.mm.bing.net/th?id=OIP.h8ISIodUaQRtSBU06KkvPwHaGr&pid=Api&P=0&h=180"},
             { name: 'Onion', price: 150.8 ,image:"https://tse4.mm.bing.net/th?id=OIP.VX-fRronTA0KV1puV3fvkAHaE8&pid=Api&P=0&h=180"},
-            { name: 'Brinjal', price: 150.8 ,image:"https://tse1.mm.bing.net/th?id=OIP.v9xh2rnmlG2WClFbCLrU8AHaHa&pid=Api&P=0&h=180"},
+            { name: 'Brinjal', price: 80.8 ,image:"https://tse1.mm.bing.net/th?id=OIP.v9xh2rnmlG2WClFbCLrU8AHaHa&pid=Api&P=0&h=180"},
             { name: 'Peas', price: 150.8 ,image:"https://tse4.mm.bing.net/th?id=OIP.SqG26vx3PHnNfi8jevF9JgHaEo&pid=Api&P=0&h=180"},
-            { name: 'BitterGaurd', price: 150.8 ,image:"https://tse3.mm.bing.net/th?id=OIP.F5T7VfUkGNw7V7EgkSLsrwHaD3&pid=Api&P=0&h=180"}, 
+            { name: 'BitterGaurd', price: 100.8 ,image:"https://tse3.mm.bing.net/th?id=OIP.F5T7VfUkGNw7V7EgkSLsrwHaD3&pid=Api&P=0&h=180"}, 
         ],
         nonVeg: [
             { name: 'chicken-65', price: 200.5 ,image:"https://tse2.mm.bing.net/th?id=OIP.PVuUzNdXnMDyA5QFOydFlwHaEK&pid=Api&P=0&h=180"},
             { name: 'Fish-Fry', price: 100.8 ,image:"https://tse1.mm.bing.net/th?id=OIP.Utz-BhMyLk1FzUaqx3nilgHaHa&pid=Api&P=0&h=180"},
-            { name: 'Biryani', price: 150.8 ,image:"https://tse1.mm.bing.net/th?id=OIP.RzJfmrSX00YO7lRLmf7GiAHaE8&pid=Api&P=0&h=180"},
-            { name: 'Chicken-lolipop', price: 150.8 ,image:"https://tse3.mm.bing.net/th?id=OIP.JPqhOa2yWScL4xERS-DPUgHaIH&pid=Api&P=0&h=180"},
-            { name: 'Egg-rice', price: 150.8 ,image:"https://thefoodietakesflight.com/wp-content/uploads/2021/08/Easy-Vegan-Soy-Sauce-Egg-Fried-Rice-Recipe-8-of-24.jpg"},
+            { name: 'Biryani', price: 100.8 ,image:"https://tse1.mm.bing.net/th?id=OIP.RzJfmrSX00YO7lRLmf7GiAHaE8&pid=Api&P=0&h=180"},
+            { name: 'Chicken-lolipop', price: 80.8 ,image:"https://tse3.mm.bing.net/th?id=OIP.JPqhOa2yWScL4xERS-DPUgHaIH&pid=Api&P=0&h=180"},
+            { name: 'Egg-rice', price: 90.8 ,image:"https://thefoodietakesflight.com/wp-content/uploads/2021/08/Easy-Vegan-Soy-Sauce-Egg-Fried-Rice-Recipe-8-of-24.jpg"},
             { name: 'Prawns', price: 150.8 ,image:"https://tse2.mm.bing.net/th?id=OIP.RY3kKMMz9HW7xltludKTeAHaE8&pid=Api&P=0&h=180"},
             { name: 'Tuna-Fish', price: 150.8 ,image:"https://tse1.mm.bing.net/th?id=OIP.ij4Az0ynCSPQAiiC03_B5AHaD1&pid=Api&P=0&h=180"},
             { name: 'Mutton', price: 150.8 ,image:"https://tse1.mm.bing.net/th?id=OIP.tWalUWrEPWfd4J7oDUiZPgHaFR&pid=Api&P=0&h=180"},
@@ -45,37 +45,32 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: [],
     reducers: {
-        addToCart:(state,action)=>{
-            const item = state.find(item=>item.name === action.payload.name)
-            if(item)
-            {
+        addToCart: (state, action) => {
+            const item = state.find(item => item.name === action.payload.name);
+            if(item) {
+                item.quantity += 1;
+            } else {
+                state.push({...action.payload, quantity: 1});
+            }
+        },
+        increment: (state, action) => {
+            const item = state.find(item => item.name === action.payload.name);
+            if(item) {
                 item.quantity += 1;
             }
-            else{
-                state.push({...action.payload,quantity:1});
+        },
+        decrement: (state, action) => {
+            const item = state.find(item => item.name === action.payload.name);
+            if(item && item.quantity > 1) {
+                item.quantity -= 1;
+            } else {
+                return state.filter(item => item.name !== action.payload.name);
             }
-            },
-            increament:(state,action)=>{
-                const item = state.find(item=>item.name === action.payload.name)
-                if(item)
-                {
-                    item.quantity +=1;
-                }
-            },
-            decreament:(state,action)=>{
-                const item = state.find(item=>item.name === action.payload.name)
-                if(item && item.quantity>1)
-                {
-                    item.quantity -= 1;
-                }
-                else{
-                    return state.filter(item=>item.name !== action.payload.name)
-                }
-            },
-            remove:(state,action) =>{
-                return state.filter(item=>item.name !== action.payload.name)
-            },
-            clearCart: () => []
+        },
+        remove: (state, action) => {
+            return state.filter(item => item.name !== action.payload.name);
+        },
+        clearCart: () => []
     }
 });
 
@@ -123,7 +118,7 @@ const store = configureStore({
     }
 });
 
-export const { addToCart, increament, decreament, remove,clearCart } = cartSlice.actions;
+export const { addToCart, increment, decrement, remove, clearCart } = cartSlice.actions;
 export const { purchageDetailsReducer } = OrdersSlice.actions;
 export const {login,logout} = authSlice.actions;
 export default store;

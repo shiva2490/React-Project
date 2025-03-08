@@ -1,79 +1,117 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "./Store";
 import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome
+import ReactPaginate from "react-paginate";
 
 function Milk() {
-    let dispatch = useDispatch();
-    let milkItems = useSelector(state => state.products.milk);
-
+    const dispatch = useDispatch();
+    const milkItems = useSelector(state => state.products.milk);
     const [filterLessThan150, setFilterLessThan150] = useState(false);
     const [filterGreaterThan150, setFilterGreaterThan150] = useState(false);
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 8;
 
-    let filteredItems = milkItems.filter(item => {
+    const filteredItems = milkItems.filter(item => {
         if (filterLessThan150 && item.price >= 150) return false;
         if (filterGreaterThan150 && item.price <= 150) return false;
         return true;
     });
 
+    const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
+    const offset = currentPage * itemsPerPage;
+    const currentItems = filteredItems.slice(offset, offset + itemsPerPage);
+
+    const handlePageClick = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
     return (
-        <div className="container mt-4">
-            <h2 className="text-primary text-center mb-4">
-                <i className="fas fa-glass-milk me-2"></i> Deserts {/* Font Awesome icon */}
+        <div className="container mt-5 pt-4">
+            <h2 className="text-primary text-center mb-4 animate__fadeIn">
+                <i className="fas fa-ice-cream me-2"></i> Desserts
             </h2>
 
-            <div className="d-flex justify-content-center mb-3">
-                <span className="me-3 fw-bold"><i className="fas fa-filter"></i> Filter by Price:</span> {/* Font Awesome icon */}
+            <div className="filter-controls mb-4 card-hover">
+                <div className="d-flex flex-wrap justify-content-center gap-3">
+                    <div className="form-check form-switch">
+                        <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id="lessThan150"
+                            checked={filterLessThan150}
+                            onChange={() => setFilterLessThan150(!filterLessThan150)}
+                        />
+                        <label className="form-check-label" htmlFor="lessThan150">
+                            <i className="fas fa-rupee-sign me-1"></i> Below 150
+                        </label>
+                    </div>
 
-                <div className="form-check form-check-inline">
-                    <input
-                        type="checkbox"
-                        className="form-check-input"
-                        checked={filterLessThan150}
-                        onChange={() => setFilterLessThan150(!filterLessThan150)}
-                    />
-                    <label className="form-check-label">
-                        <i className="fas fa-rupee-sign"></i> &lt; 150 {/* Font Awesome icon */}
-                    </label>
-                </div>
-
-                <div className="form-check form-check-inline">
-                    <input
-                        type="checkbox"
-                        className="form-check-input"
-                        checked={filterGreaterThan150}
-                        onChange={() => setFilterGreaterThan150(!filterGreaterThan150)}
-                    />
-                    <label className="form-check-label">
-                        <i className="fas fa-rupee-sign"></i> &gt; 150 {/* Font Awesome icon */}
-                    </label>
+                    <div className="form-check form-switch">
+                        <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id="greaterThan150"
+                            checked={filterGreaterThan150}
+                            onChange={() => setFilterGreaterThan150(!filterGreaterThan150)}
+                        />
+                        <label className="form-check-label" htmlFor="greaterThan150">
+                            <i className="fas fa-rupee-sign me-1"></i> Above 150
+                        </label>
+                    </div>
                 </div>
             </div>
 
-            <div className="row">
-                {filteredItems.map((item, index) => (
-                    <div key={index} className="col-md-3 mb-4"> {/* 4 items per row */}
-                        <div className="card h-100">
-                            <img src={item.image} className="card-img-top img-fluid" alt={item.name} style={{ height: '150px', objectFit: 'cover' }} /> {/* Image styling */}
+            <div className="row row-cols-1 row-cols-md-4 g-4">
+                {currentItems.map((item, index) => (
+                    <div key={index} className="col">
+                        <div className="card h-100 shadow-sm card-hover">
+                            <img 
+                                src={item.image} 
+                                className="card-img-top img-scale" 
+                                alt={item.name} 
+                                style={{ height: '200px', objectFit: 'cover' }}
+                            />
                             <div className="card-body d-flex flex-column">
-                                <div className="d-flex justify-content-between align-items-center"> {/* Name and price on one line */}
-                                    <h6 className="card-title mb-0" style={{fontSize:"14px"}}>{item.name}</h6>
-                                    <p className="card-text mb-0" style={{fontSize:"14px"}}>₹{item.price}</p>
+                                <h5 className="card-title text-truncate">{item.name}</h5>
+                                <div className="d-flex justify-content-between align-items-center mb-3">
+                                    <span className="h5 text-primary blink-price">
+                                        ₹{item.price}
+                                    </span>
                                 </div>
-                                <div className="mt-auto"> {/* Push button to the bottom */}
-                                    <div className="d-flex justify-content-center"> {/* Center the button */}
-                                        <button className="btn btn-primary btn-sm w-75 d-flex align-items-center justify-content-center" onClick={() => dispatch(addToCart(item))}>
-                                            <span style={{fontSize:"12px"}}>Add To Cart</span> {/* Button text only */}
-                                        </button>
-                                    </div>
-                                </div>
+                                <button 
+                                    className="btn btn-outline-primary mt-auto hover-grow"
+                                    onClick={() => dispatch(addToCart(item))}
+                                >
+                                    <i className="fas fa-cart-plus me-2"></i>Add to Cart
+                                </button>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
+
+            {filteredItems.length > itemsPerPage && (
+                <div className="d-flex justify-content-center mt-4">
+                    <ReactPaginate
+                        previousLabel={<i className="fas fa-chevron-left"></i>}
+                        nextLabel={<i className="fas fa-chevron-right"></i>}
+                        pageCount={pageCount}
+                        onPageChange={handlePageClick}
+                        containerClassName="pagination"
+                        pageClassName="page-item"
+                        pageLinkClassName="page-link"
+                        activeClassName="active"
+                        previousClassName="page-item"
+                        nextClassName="page-item"
+                    />
+                </div>
+            )}
+
+            {filteredItems.length === 0 && (
+                <div className="text-center mt-5 text-muted">
+                    <h4><i className="fas fa-times-circle me-2"></i>No desserts found</h4>
+                </div>
+            )}
         </div>
     );
 }
