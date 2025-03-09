@@ -1,52 +1,92 @@
 /* App.css */
-/* Global Variables */
+
 :root {
-  --primary-color: #2c3e50;
-  --secondary-color: #1abc9c;
-  --danger-color: #e74c3c;
-  --success-color: #27ae60;
-  --warning-color: #f1c40f;
-  --light-color: #ecf0f1;
-  --dark-color: #2c3e50;
+  --primary-color: #1a535c;
+  --secondary-color: #4ecdc4;
+  --accent-color: #ff6b6b;
+  --dark-color: #292f36;
+  --light-color: #f7fff7;
+  --success-color: #4CAF50;
+  --warning-color: #FFC107;
+  --danger-color: #F44336;
   --transition-time: 0.3s;
   --border-radius: 12px;
+  --text-dark: #2d3436;
+  --text-light: #ffffff;
 }
 
 /* Base Styles */
 body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background-color: #f8f9fa;
+  background-color: var(--light-color);
+  color: var(--text-dark);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding-top: 70px;
   margin: 0;
+  line-height: 1.6;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Mobile First Navigation */
+.navbar {
+  background: var(--dark-color);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0.8rem 1rem;
 }
 
-@keyframes pricePulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+.navbar-brand {
+  font-weight: 600;
+  color: var(--text-light) !important;
 }
 
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
+.nav-link {
+  color: rgba(255,255,255,0.8) !important;
+  transition: all var(--transition-time) ease;
 }
 
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--text-light) !important;
+  transform: translateY(-2px);
 }
 
-.blink-price {
-  animation: blink 1.5s ease-in-out infinite;
+.navbar-toggler {
+  border: none;
+  padding: 0.5rem;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+@media (max-width: 768px) {
+  .navbar-collapse {
+    background: var(--dark-color);
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+}
+
+/* Home Page Improvements */
+.home-container .hero-section {
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+              url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover;
+  color: var(--text-light);
+  padding: 6rem 0;
+}
+
+.home-container .hero-section h1 {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* About Us Page Contrast Fix */
+.about-us-container .hero-section {
+  background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+              url('https://source.unsplash.com/random/1920x1080/?grocery') center/cover;
+  color: var(--text-light);
 }
 
 /* Card Styles */
@@ -54,437 +94,133 @@ body {
   border: none;
   border-radius: var(--border-radius);
   transition: all var(--transition-time) ease;
-  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.card-hover {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card-hover:hover {
+.card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
-.card-img-top {
-  transition: transform var(--transition-time) ease;
-  height: 200px;
-  object-fit: cover;
-}
-
-.img-scale:hover {
-  transform: scale(1.05);
-}
-
-/* Price and Discount Styles */
-.price-tag {
-  font-size: 1.1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  background: var(--success-color);
-  color: white;
-}
-
-.category-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 0.9rem;
-  padding: 0.5rem 1rem;
-  z-index: 2;
-}
-
-/* Home Page Specific Styles */
-.home-container {
-  background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
-              url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover;
-}
-
-.hero-section {
-  padding: 6rem 0;
-  background: rgba(0,0,0,0.5);
-  color: white;
-  margin-bottom: 3rem;
-}
-
-.search-bar, .category-filter {
-  border-radius: 2rem;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-}
-
-.menu-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-/* Universal Transition Styles */
-.hover-grow {
-  transition: all 0.2s ease;
-}
-
-.hover-grow:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .card-img-top {
-    height: 150px;
-  }
-  
-  .hero-section {
-    padding: 3rem 0;
-  }
-  
-  .price-tag {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
-  }
-}
-
-/* Navbar and Footer Enhancements */
-.navbar {
-  background: linear-gradient(135deg, var(--primary-color), #3498db);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
+/* Footer Styles */
 .footer {
-  background: linear-gradient(135deg, var(--primary-color), #34495e);
-  color: white;
+  background: var(--dark-color);
+  color: var(--text-light);
   padding: 2rem 0;
   margin-top: auto;
 }
 
-/* Utility Classes */
-.bg-light {
-  background-color: var(--light-color) !important;
+.footer a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: opacity var(--transition-time) ease;
 }
 
-.empty-state {
-  opacity: 0.7;
-  animation: fadeIn 1s ease;
-}
-
-/* Form Elements */
-.form-switch .form-check-input:checked {
-  background-color: var(--success-color);
-  border-color: var(--success-color);
-}
-
-/* Pagination */
-.pagination {
-  gap: 0.5rem;
-}
-
-.page-link {
-  border-radius: var(--border-radius) !important;
-}
-
-/* Category Specific Borders */
-[data-category="veg"] .card-img-top {
-  border-bottom: 3px solid var(--success-color);
-}
-
-[data-category="nonveg"] .card-img-top {
-  border-bottom: 3px solid var(--danger-color);
-}
-
-[data-category="milk"] .card-img-top {
-  border-bottom: 3px solid var(--warning-color);
-}
-
-/* App.css */
-/* Global Variables */
-:root {
-  --primary-color: #2c3e50;
-  --secondary-color: #1abc9c;
-  --danger-color: #e74c3c;
-  --success-color: #27ae60;
-  --warning-color: #f1c40f;
-  --light-color: #ecf0f1;
-  --dark-color: #2c3e50;
-  --transition-time: 0.3s;
-  --border-radius: 12px;
-}
-
-/* Base Styles */
-body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background-color: #f8f9fa;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-top: 70px;
-  margin: 0;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pricePulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
-}
-
-.blink-price {
-  animation: blink 1.5s ease-in-out infinite;
-}
-
-/* Card Styles */
-.card {
-  border: none;
-  border-radius: var(--border-radius);
-  transition: all var(--transition-time) ease;
-  overflow: hidden;
-}
-
-.card-hover {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-}
-
-.card-img-top {
-  transition: transform var(--transition-time) ease;
-  height: 200px;
-  object-fit: cover;
-}
-
-.img-scale:hover {
-  transform: scale(1.05);
-}
-
-/* Page Specific Styles */
-/* Home Page */
-.home-container {
-  background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
-              url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover;
-}
-
-.hero-section {
-  padding: 6rem 0;
-  background: rgba(0,0,0,0.5);
-  color: white;
-  margin-bottom: 3rem;
-}
-
-/* About Us Page */
-.about-us-container {
-  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
-  min-height: 100vh;
-}
-
-.about-hero {
-  background: linear-gradient(135deg, var(--primary-color), #3498db);
-  padding: 6rem 0;
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-  margin-bottom: 5rem;
-  color: white;
-}
-
-.section-title {
-  position: relative;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: var(--secondary-color);
-}
-
-.feature-card {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-  transition: all var(--transition-time) ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
-
-.feature-icon {
-  font-size: 2.5rem;
+.footer a:hover {
+  opacity: 0.8;
   color: var(--secondary-color);
-  margin-bottom: 1rem;
 }
 
-/* Contact Us Page */
-.contact-container {
-  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
-  min-height: 100vh;
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
 }
 
-.contact-hero {
-  background: linear-gradient(135deg, var(--success-color), #2ecc71);
-  padding: 6rem 0;
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-  color: white;
-  margin-bottom: 5rem;
+.social-icons a {
+  font-size: 1.5rem;
+  transition: transform var(--transition-time) ease;
 }
 
-.contact-info-card {
-  background: white;
+.social-icons a:hover {
+  transform: translateY(-3px);
+}
+
+/* Text Contrast Fixes */
+.text-muted {
+  color: #6c757d !important;
+}
+
+.alert-warning {
+  background: #fff3cd;
+  color: #856404;
+  border-color: #ffeeba;
+}
+
+/* Button Styles */
+.btn {
+  transition: all var(--transition-time) ease;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   border-radius: var(--border-radius);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
-.method-card {
-  transition: all var(--transition-time) ease;
+.btn-primary {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
-.method-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+.btn-primary:hover {
+  background: #14444c;
+  border-color: #14444c;
 }
 
-.method-icon {
-  font-size: 2.5rem;
-  color: var(--success-color);
-}
-
-/* Form Styles */
-.form-control {
-  border: 2px solid #e9ecef;
-  padding: 0.75rem;
-  transition: all var(--transition-time) ease;
-}
-
-.form-control:focus {
-  border-color: var(--success-color);
-  box-shadow: 0 0 0 0.25rem rgba(46,204,113,0.25);
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
-  .about-hero, .contact-hero {
-    padding: 4rem 0;
-    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-  }
-  
-  .hero-section {
-    padding: 4rem 0;
-  }
-  
-  .feature-card, .method-card {
-    margin-bottom: 2rem;
-  }
-}
-
+/* Mobile Responsive Grid */
 @media (max-width: 768px) {
-  .card-img-top {
-    height: 150px;
+  .row-cols-md-4 {
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .hero-section {
-    padding: 3rem 0;
+  .home-container .hero-section,
+  .about-us-container .hero-section {
+    padding: 4rem 0;
   }
   
-  .section-title {
-    font-size: 1.5rem;
-  }
-  
-  .feature-icon {
+  h1 {
     font-size: 2rem;
   }
   
-  .about-hero h1, .contact-hero h1 {
-    font-size: 2rem;
-  }
-  
-  .navbar-brand {
-    font-size: 1.2rem;
-  }
-  
-  .form-control {
-    padding: 0.5rem;
+  h2 {
+    font-size: 1.75rem;
   }
 }
 
 @media (max-width: 576px) {
-  body {
-    padding-top: 60px;
+  .row-cols-md-4 {
+    grid-template-columns: 1fr;
   }
   
-  .card-img-top {
-    height: 120px;
+  .navbar-brand {
+    font-size: 1.1rem;
   }
   
-  .about-hero, .contact-hero {
-    clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
-    padding: 3rem 0;
-  }
-  
-  .method-icon {
-    font-size: 2rem;
-  }
-  
-  .section-title::after {
-    width: 40px;
-    height: 2px;
-  }
-  
-  .price-tag {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
+  .footer .col-md-6 {
+    text-align: center !important;
+    margin-bottom: 1.5rem;
   }
 }
 
-/* Navbar and Footer */
-.navbar {
-  background: linear-gradient(135deg, var(--primary-color), #3498db);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+/* Form Controls */
+.form-control {
+  border: 2px solid #e9ecef;
+  transition: all var(--transition-time) ease;
+  border-radius: var(--border-radius);
 }
 
-.footer {
-  background: linear-gradient(135deg, var(--primary-color), #34495e);
-  color: white;
-  padding: 2rem 0;
-  margin-top: auto;
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(26,83,92,0.25);
 }
 
-/* Utility Classes */
-.hover-grow {
-  transition: all 0.2s ease;
+/* Image Scaling */
+.img-scale {
+  transition: transform var(--transition-time) ease;
 }
 
-.hover-grow:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
-.empty-state {
-  opacity: 0.7;
-  animation: fadeIn 1s ease;
-}
-
-.bg-light {
-  background-color: var(--light-color) !important;
+.img-scale:hover {
+  transform: scale(1.03);
 }
 
 /* Pagination */
@@ -494,17 +230,179 @@ body {
 
 .page-link {
   border-radius: var(--border-radius) !important;
+  border: none;
+  color: var(--primary-color);
 }
 
-/* Category Styles */
-[data-category="veg"] .card-img-top {
-  border-bottom: 3px solid var(--success-color);
+.page-item.active .page-link {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
-[data-category="nonveg"] .card-img-top {
-  border-bottom: 3px solid var(--danger-color);
+/* Error Page */
+.progress-bar {
+  transition: width 3s linear;
 }
 
-[data-category="milk"] .card-img-top {
-  border-bottom: 3px solid var(--warning-color);
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Contact Page Improvements */
+.contact-hero {
+  background: var(--primary-color);
+  color: var(--text-light);
+}
+
+.method-card {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: var(--border-radius);
+}
+
+/* Price Badge Contrast */
+.price-tag {
+  background: var(--success-color);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Animation Enhancements */
+@keyframes smoothAppear {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: smoothAppear 0.6s ease-out;
+}
+
+@keyframes subtleBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+.blink-price {
+  animation: subtleBlink 1.5s ease-in-out infinite;
+}
+
+/* Quantity Badge */
+.badge {
+  font-weight: 500;
+}
+
+/* App.css */
+/* Add these new styles at the bottom of your existing App.css */
+
+/* Order Number Badge Fix */
+.order-card .badge {
+  background-color: var(--primary-color) !important;
+  color: var(--text-light) !important;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+/* Consistent Image Sizes */
+.card-img-container {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 1/1; /* Maintain square aspect ratio */
+}
+
+.card-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-container img {
+  transform: scale(1.05);
+}
+
+/* Image Uniformity Fix */
+.img-uniform {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+.icon-receipt {
+  color: #4ecdc4;
+  transition: color 0.3s ease;
+}
+
+.icon-receipt:hover {
+  color: #3aa89f; /* Slightly darker shade */
+}
+/* Order number styling */
+.order-number {
+  color: var(--primary-color) !important; /* Using primary color from your theme */
+  /* OR specify custom color */
+  /* color: #2a9d8f !important; */
+}
+
+/* If using badge version */
+.order-badge {
+  background-color: var(--secondary-color) !important;
+  color: white !important;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+/* Receipt icon color */
+.order-header .fa-receipt {
+  color: var(--secondary-color) !important; /* Using your secondary color */
+  /* OR */
+  color: #ff6b6b !important; /* Coral accent color */
+}
+/* Footer Styles */
+.footer {
+  background: var(--dark-color);
+  color: var(--text-light);
+  padding: 2rem 0;
+  margin-top: auto;
+  text-align: center; /* Added this line */
+}
+
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.footer p {
+  margin: 0.5rem 0;
+  max-width: 600px;
+}
+
+.footer a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: opacity var(--transition-time) ease;
+}
+
+.footer a:hover {
+  opacity: 0.8;
+  color: var(--secondary-color);
 }

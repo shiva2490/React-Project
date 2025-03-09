@@ -32,12 +32,14 @@ function Orders() {
                                 <div className="card shadow-lg border-0 rounded-4 overflow-hidden">
                                     <div className="card-header bg-gradient-primary text-white py-3">
                                         <div className="d-flex justify-content-between align-items-center">
-                                            <h3 className="h5 mb-0">
-                                                <i className="fas fa-receipt me-2"></i>
-                                                Order #{orders.length - index}
-                                            </h3>
-                                            <span className="badge bg-white text-primary fs-6">
-                                                {new Date(order.date).toLocaleDateString()}
+                                        <h3 className="h5 mb-0">
+                                        <i className="fas fa-receipt me-2"></i>
+                                        <span className="order-badge">
+                                            Order #{orders.length - index}
+                                        </span>
+                                        </h3>
+                                            <span className="badge bg-primary text-white fs-6">
+                                            {new Date(order.date).toLocaleDateString()}
                                             </span>
                                         </div>
                                     </div>

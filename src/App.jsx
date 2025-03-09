@@ -151,32 +151,28 @@ function App() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-dark text-white mt-5 py-4">
-                <div className="container text-center">
+                            <footer className="footer">
+                <div className="container">
                     <div className="social-icons">
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-linkedin"></i>
-                        </a>
+                    {/* Social media icons */}
                     </div>
-                    <p className="mb-0 mt-3">
-                        © {new Date().getFullYear()} FreshMart. All rights reserved. | 
-                        <Link to="/aboutus" className="text-white ms-2">About Us</Link> | 
-                        <Link to="/contactus" className="text-white ms-2">Contact Us</Link>
+                    
+                    <div className="footer-links">
+                    <Link to="/aboutus" className="mx-3">About Us</Link>
+                    <Link to="/contactus" className="mx-3">Contact Us</Link>
+                    <Link to="/privacy" className="mx-3">Privacy Policy</Link>
+                    <Link to="/terms" className="mx-3">Terms of Service</Link>
+                    </div>
+
+                    <p className="mt-3">
+                    © {new Date().getFullYear()} FreshMart. All rights reserved.
                     </p>
-                    <p className="mt-2 mb-0 text-muted">
-                        <small>Made with <i className="fas fa-heart text-danger"></i> for fresh food</small>
+                    
+                    <p className="text-muted small mt-2">
+                    Made with <i className="fas fa-heart text-danger"></i> for fresh food
                     </p>
                 </div>
-            </footer>
+                </footer>
         </BrowserRouter>
     );
 }

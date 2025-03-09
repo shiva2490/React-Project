@@ -122,7 +122,7 @@ const ContactUs = () => {
               <h4 className="my-3">Email Support</h4>
               <p>24/7 email support with 12-hour response time</p>
               <a href="mailto:support@freshmart.com" className="method-link">
-                support@freshmart.com
+                tshivashankar249@gmail.com
               </a>
             </div>
           </div>

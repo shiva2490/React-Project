@@ -94,16 +94,16 @@ function Home() {
                 {currentItems.map((item, index) => (
                     <div key={index} className="col">
                         <div className="card h-100 shadow-sm menu-card">
-                            <div className="card-img-container position-relative">
+                        <div className="card-img-container">
                                 <img 
                                     src={item.image} 
-                                    className="card-img-top" 
+                                    className="card-img-top img-uniform" 
                                     alt={item.name}
                                 />
                                 <span className={`category-badge badge ${getCategoryBadgeClass(item.category)}`}>
                                     {getCategoryIcon(item.category)} {item.category === 'nonVeg' ? 'Non-Veg' : item.category}
                                 </span>
-                            </div>
+                                </div>
                             
                             <div className="card-body d-flex flex-column">
                                 <div className="d-flex justify-content-between align-items-center mb-3">
