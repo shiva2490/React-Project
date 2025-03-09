@@ -6,14 +6,35 @@ const productsSlice = createSlice({
     name: 'products',
     initialState: {
         veg: [
-            { name: 'MushRoom', price: 150.8 ,image:"https://tse3.mm.bing.net/th?id=OIP.M4vr-t_PxdlTvg6zdVHbDQHaE9&pid=Api&P=0&h=180"},
-            { name: 'Tomato', price: 100.5 ,image: "https://tse3.mm.bing.net/th?id=OIP.VLq0kRvM53MGoT7XMmwLOwHaE8&pid=Api&P=0&h=180" },
-            { name: 'Potato', price: 100.8 , image:"https://tse3.mm.bing.net/th?id=OIP.xdxwjQ_mSva9hgccLToezgHaE9&pid=Api&P=0&h=180"},
-            { name: 'Carrot', price: 150.8 , image:"https://tse3.mm.bing.net/th?id=OIP.h8ISIodUaQRtSBU06KkvPwHaGr&pid=Api&P=0&h=180"},
-            { name: 'Onion', price: 150.8 ,image:"https://tse4.mm.bing.net/th?id=OIP.VX-fRronTA0KV1puV3fvkAHaE8&pid=Api&P=0&h=180"},
+            { name: 'Arugula', price: 79.99,image:"http://www.seasonsandsuppers.ca/wp-content/uploads/2010/06/arugula.jpg"},
             { name: 'Brinjal', price: 80.8 ,image:"https://tse1.mm.bing.net/th?id=OIP.v9xh2rnmlG2WClFbCLrU8AHaHa&pid=Api&P=0&h=180"},
-            { name: 'Peas', price: 150.8 ,image:"https://tse4.mm.bing.net/th?id=OIP.SqG26vx3PHnNfi8jevF9JgHaEo&pid=Api&P=0&h=180"},
-            { name: 'BitterGaurd', price: 100.8 ,image:"https://tse3.mm.bing.net/th?id=OIP.F5T7VfUkGNw7V7EgkSLsrwHaD3&pid=Api&P=0&h=180"}, 
+            { name: 'beets', price: 89.99,image:"https://i1.wp.com/baybranchfarm.com/wp-content/uploads/2018/12/redbeets.jpg?fit=2000%2C2000&ssl=1"},
+            { name: 'Bell peppers', price: 99.99,image:"https://images.freeimages.com/images/large-previews/d21/bell-peppers-1329005.jpg"},
+            { name: 'BitterGaurd', price: 99.9 ,image:"https://tse3.mm.bing.net/th?id=OIP.F5T7VfUkGNw7V7EgkSLsrwHaD3&pid=Api&P=0&h=180"},
+            { name: 'Broccoli', price: 159.99,image:"https://images6.alphacoders.com/658/658529.jpg"},
+            { name: 'Corn', price: 39.99,image:"https://tse3.mm.bing.net/th?id=OIP.TAdCIdNs4s0396lj8MFqNQHaE6&pid=Api&P=0&h=180"},
+            { name: 'cauliflowers', price: 69.99,image:"https://c8.alamy.com/comp/2AXEHGE/cauliflowers-on-a-market-stall-2AXEHGE.jpg"},
+            { name: 'Celery', price: 79.99,image:"https://images.saymedia-content.com/.image/t_share/MTc2MjQ3MjYxOTMwNTMwMjE3/health-benefits-of-celery.jpg"},
+            { name: 'Carrot', price: 79.8 , image:"https://tse3.mm.bing.net/th?id=OIP.h8ISIodUaQRtSBU06KkvPwHaGr&pid=Api&P=0&h=180"},
+            { name: 'Cucumber', price: 79.99,image:"https://images.fineartamerica.com/images-medium-large-5/basket-of-cucumbers-michael-moriarty.jpg"},
+            { name: 'Esarole ', price: 119.99,image:"https://www.mashed.com/img/gallery/the-difference-between-endive-and-escarole/intro-1619281786.jpg"},
+            { name: 'French Beans', price: 159.99,image:"https://thumbs.dreamstime.com/b/french-beans-17364333.jpg"},
+            { name: 'Green Beans', price: 129.99,image:"https://thumbs.dreamstime.com/b/fresh-green-beans-21791876.jpg"},
+            { name: 'Ginger', price: 139.99,image:"https://static.india.com/wp-content/uploads/2021/02/ginger-1.jpg"},
+            { name: 'Green peas', price: 159.99,image:"https://tse1.mm.bing.net/th?id=OIP.UCG1j-dYQvCvt0lloQcKNQHaEK&pid=Api&P=0&h=180"},
+            { name: 'Garlic', price: 299.99,image:"https://cdn.pixabay.com/photo/2020/09/15/07/05/garlic-5572882_1280.jpg"},
+            { name: 'Lentils', price: 199.99,image:"https://northernnester.com/wp-content/uploads/2021/01/types-of-lentils.jpg"},
+            { name: 'Onion', price: 149.8 ,image:"https://tse4.mm.bing.net/th?id=OIP.VX-fRronTA0KV1puV3fvkAHaE8&pid=Api&P=0&h=180"},
+            { name: 'Parsley', price: 159.99,image:"https://www.housedigest.com/img/gallery/how-to-grow-and-care-for-your-own-parsley-plant/l-intro-1676921688.jpg"},
+            { name: 'Potato', price: 59.8 , image:"https://tse3.mm.bing.net/th?id=OIP.xdxwjQ_mSva9hgccLToezgHaE9&pid=Api&P=0&h=180"},
+            { name: 'Pumpkin', price: 199.8 , image:"https://img.washingtonpost.com/rw/2010-2019/WashingtonPost/2014/10/24/Food/Images/pumpkins171414111212.jpg"},
+            { name: 'Sweet Potato', price: 119.8 , image:"https://naads.or.ug/wp-content/uploads/2020/09/sweet-potatoes1.jpg"},
+            { name: 'Spinach', price: 179.8 , image:"https://nationaltoday.com/wp-content/uploads/2022/05/3-Spinach.jpg"},
+            { name: 'MushRoom', price: 159.8 ,image:"https://tse3.mm.bing.net/th?id=OIP.M4vr-t_PxdlTvg6zdVHbDQHaE9&pid=Api&P=0&h=180"},
+            { name: 'Tomato', price: 199.5 ,image: "https://tse3.mm.bing.net/th?id=OIP.VLq0kRvM53MGoT7XMmwLOwHaE8&pid=Api&P=0&h=180" },
+            { name: 'Turnips', price: 209.5 ,image: "https://tse2.mm.bing.net/th?id=OIP.5PUUV7_E42wBsqfiHxXkFwHaFj&pid=Api&P=0&h=180" },
+            { name: 'Watercress', price: 119.5 ,image: "https://image.freepik.com/free-photo/watercress-bamboo-basket-white-background_51524-17099.jpg" }
+             
         ],
         nonVeg: [
             { name: 'chicken-65', price: 200.5 ,image:"https://tse2.mm.bing.net/th?id=OIP.PVuUzNdXnMDyA5QFOydFlwHaEK&pid=Api&P=0&h=180"},
@@ -84,6 +105,21 @@ const OrdersSlice = createSlice({
     }
 });
 
+const timerSlice = createSlice({
+    name: 'timer',
+    initialState: {
+      timeLeft: 300 // 15 minutes in seconds
+    },
+    reducers: {
+      decrementTime: (state) => {
+        if(state.timeLeft > 0) state.timeLeft -= 1;
+      },
+      resetTimer: (state) => {
+        state.timeLeft = 300;
+      }
+    }
+  });
+
 
 //AuthSlice
 const authSlice = createSlice({
@@ -114,11 +150,13 @@ const store = configureStore({
         products: productsSlice.reducer,
         cart: cartSlice.reducer,
         orders: OrdersSlice.reducer,
+        timer: timerSlice.reducer,
         auth:authSlice.reducer
     }
 });
 
 export const { addToCart, increment, decrement, remove, clearCart } = cartSlice.actions;
 export const { purchageDetailsReducer } = OrdersSlice.actions;
+export const { decrementTime, resetTimer } = timerSlice.actions;
 export const {login,logout} = authSlice.actions;
 export default store;

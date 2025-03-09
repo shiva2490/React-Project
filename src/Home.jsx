@@ -4,14 +4,15 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./App.css";
 
 function Home() {
     const dispatch = useDispatch();
     const vegItems = useSelector(state => state.products.veg);
     const nonVegItems = useSelector(state => state.products.nonVeg);
     const milkItems = useSelector(state => state.products.milk);
+    const timeLeft = useSelector(state => state.timer.timeLeft);
     
-    // Add category to each item
     const allItems = [
         ...vegItems.map(item => ({ ...item, category: 'veg' })),
         ...nonVegItems.map(item => ({ ...item, category: 'nonVeg' })),
@@ -23,32 +24,43 @@ function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(8);
 
+    const calculatePrice = (price) => timeLeft > 0 ? price * 0.9 : price;
+
     const filteredItems = allItems.filter(item => {
         const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
         return matchesSearch && matchesCategory;
     });
 
-    // Pagination logic
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    };
 
     return (
         <div className="container-fluid py-4 home-container">
-            {/* Hero Section */}
+            {timeLeft > 0 && (
+                <div className="alert alert-warning text-center fw-bold mb-4 fade-in">
+                    <i className="fas fa-clock me-2"></i>
+                    FLASH OFFER! Order within {formatTime(timeLeft)} for 10% OFF!
+                </div>
+            )}
+
             <div className="hero-section text-center mb-5">
-                <h1 className="display-4 fw-bold text-dark mb-3">
-                    <i className="fas fa-utensils me-3 text-primary"></i>
+                <h1 className="display-4 fw-bold text-light mb-3">
+                    <i className="fas fa-utensils me-3 text-warning"></i>
                     Welcome to Flavor Haven
                 </h1>
-                <p className="lead text-muted">Discover our exquisite menu items</p>
+                <p className="lead text-light opacity-75">Discover our exquisite menu items</p>
             </div>
 
-            {/* Search and Filters */}
             <div className="row mb-4 g-3">
                 <div className="col-md-8">
                     <div className="input-group search-bar">
@@ -78,7 +90,6 @@ function Home() {
                 </div>
             </div>
 
-            {/* Menu Grid */}
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
                 {currentItems.map((item, index) => (
                     <div key={index} className="col">
@@ -88,7 +99,6 @@ function Home() {
                                     src={item.image} 
                                     className="card-img-top" 
                                     alt={item.name}
-                                    style={{ height: '200px', objectFit: 'cover' }}
                                 />
                                 <span className={`category-badge badge ${getCategoryBadgeClass(item.category)}`}>
                                     {getCategoryIcon(item.category)} {item.category === 'nonVeg' ? 'Non-Veg' : item.category}
@@ -98,15 +108,25 @@ function Home() {
                             <div className="card-body d-flex flex-column">
                                 <div className="d-flex justify-content-between align-items-center mb-3">
                                     <h5 className="card-title mb-0">{item.name}</h5>
-                                    <span className="price-tag badge bg-success">
-                                        ₹{item.price.toFixed(2)}
-                                    </span>
+                                    <div className="d-flex flex-column">
+                                        {timeLeft > 0 && (
+                                            <del className="text-muted small">
+                                                ₹{item.price.toFixed(2)}
+                                            </del>
+                                        )}
+                                        <span className="price-tag badge bg-success mt-1">
+                                            ₹{calculatePrice(item.price).toFixed(2)}
+                                        </span>
+                                    </div>
                                 </div>
                                 
                                 <div className="mt-auto">
                                     <button
                                         className="btn btn-primary w-100 add-to-cart-btn"
-                                        onClick={() => dispatch(addToCart(item))}
+                                        onClick={() => dispatch(addToCart({
+                                            ...item,
+                                            price: calculatePrice(item.price)
+                                        }))}
                                     >
                                         <i className="fas fa-cart-plus me-2"></i>
                                         Add to Cart
@@ -118,7 +138,6 @@ function Home() {
                 ))}
             </div>
 
-            {/* Pagination */}
             {totalPages > 1 && (
                 <nav className="d-flex justify-content-center mt-4">
                     <ul className="pagination">
@@ -154,7 +173,6 @@ function Home() {
                 </nav>
             )}
 
-            {/* Empty State */}
             {filteredItems.length === 0 && (
                 <div className="text-center py-5 empty-state">
                     <i className="fas fa-search fa-3x text-muted mb-3"></i>
@@ -166,7 +184,6 @@ function Home() {
     );
 }
 
-// Updated helper functions
 const getCategoryBadgeClass = (category) => {
     switch(category) {
         case 'veg': return 'bg-success';

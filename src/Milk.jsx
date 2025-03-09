@@ -6,10 +6,13 @@ import ReactPaginate from "react-paginate";
 function Milk() {
     const dispatch = useDispatch();
     const milkItems = useSelector(state => state.products.milk);
+    const timeLeft = useSelector(state => state.timer.timeLeft);
     const [filterLessThan150, setFilterLessThan150] = useState(false);
     const [filterGreaterThan150, setFilterGreaterThan150] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 8;
+
+    const calculatePrice = (price) => timeLeft > 0 ? price * 0.9 : price;
 
     const filteredItems = milkItems.filter(item => {
         if (filterLessThan150 && item.price >= 150) return false;
@@ -21,13 +24,24 @@ function Milk() {
     const offset = currentPage * itemsPerPage;
     const currentItems = filteredItems.slice(offset, offset + itemsPerPage);
 
-    const handlePageClick = ({ selected }) => {
-        setCurrentPage(selected);
+    const handlePageClick = ({ selected }) => setCurrentPage(selected);
+
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     };
 
     return (
         <div className="container mt-5 pt-4">
-            <h2 className="text-primary text-center mb-4 animate__fadeIn">
+            {timeLeft > 0 && (
+                <div className="alert alert-warning text-center fw-bold mb-4 fade-in">
+                    <i className="fas fa-clock me-2"></i>
+                    FLASH OFFER! Order within {formatTime(timeLeft)} for 10% OFF!
+                </div>
+            )}
+
+            <h2 className="text-primary text-center mb-4">
                 <i className="fas fa-ice-cream me-2"></i> Desserts
             </h2>
 
@@ -45,7 +59,6 @@ function Milk() {
                             <i className="fas fa-rupee-sign me-1"></i> Below 150
                         </label>
                     </div>
-
                     <div className="form-check form-switch">
                         <input
                             type="checkbox"
@@ -74,13 +87,23 @@ function Milk() {
                             <div className="card-body d-flex flex-column">
                                 <h5 className="card-title text-truncate">{item.name}</h5>
                                 <div className="d-flex justify-content-between align-items-center mb-3">
-                                    <span className="h5 text-primary blink-price">
-                                        ₹{item.price}
-                                    </span>
+                                    <div className="d-flex flex-column">
+                                        {timeLeft > 0 && (
+                                            <del className="text-muted small">
+                                                ₹{item.price.toFixed(2)}
+                                            </del>
+                                        )}
+                                        <span className="h5 text-primary blink-price">
+                                            ₹{calculatePrice(item.price).toFixed(2)}
+                                        </span>
+                                    </div>
                                 </div>
                                 <button 
                                     className="btn btn-outline-primary mt-auto hover-grow"
-                                    onClick={() => dispatch(addToCart(item))}
+                                    onClick={() => dispatch(addToCart({
+                                        ...item,
+                                        price: calculatePrice(item.price)
+                                    }))}
                                 >
                                     <i className="fas fa-cart-plus me-2"></i>Add to Cart
                                 </button>
