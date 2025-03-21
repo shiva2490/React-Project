@@ -17,10 +17,10 @@ function Cart() {
 
     const applyCoupon = () => {
         const coupons = {
-            'RATAN10': 10,
-            'RATAN20': 20,
-            'RATAN30': 30,
-            'RATAN40': 40
+            'FH10': 10,
+            'FH20': 20,
+            'FH30': 30,
+            'FH40': 40
         };
         const discount = coupons[coupon.toUpperCase()] || 0;
         setCouponDiscount(discount);
@@ -71,7 +71,7 @@ function Cart() {
                                         <div className="flex-grow-1">
                                             <h5 className="mb-1">{item.name}</h5>
                                             <div className="d-flex align-items-center">
-                                                <span className="text-muted me-3">₹{item.price}</span>
+                                                <span className="text-muted me-3">₹{(item.quantity*item.price).toFixed(2)}</span>
                                                 <div className="btn-group">
                                                 <button 
                                                         className="btn btn-outline-secondary btn-sm"

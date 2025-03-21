@@ -26,7 +26,6 @@ function App() {
     const { isAuthenticated, user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
-
     useEffect(() => {
       const timer = setInterval(() => {
         dispatch(decrementTime());
@@ -51,21 +50,30 @@ function App() {
                     <Link to="/home" className="navbar-brand fw-bold">
                         <i className="fas fa-shopping-basket me-2"></i> FreshMart
                     </Link>
-                    {/* ... rest of nav toggle button remains same */}
+                    
+                    {/* Hamburger Menu Button */}
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        onClick={() => setIsOpen(!isOpen)}
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
 
                     <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}>
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            {/* Updated Nav Items with better icons */}
                             <li className="nav-item">
                                 <Link to="/veg" className="nav-link hover-grow" onClick={() => setIsOpen(false)}>
                                     <i className="fas fa-leaf me-2"></i> Veggies
                                 </Link>
                             </li>
-                            <li className="nav-item">
+                                <li className="nav-item">
                                 <Link to="/nonveg" className="nav-link hover-grow" onClick={() => setIsOpen(false)}>
-                                    <i className="fas fa-drumstick me-2"></i> Non-Veg
+                                <i className="fas fa-drumstick-bite me-2"></i>
+                                    Non-Veg
                                 </Link>
-                            </li>
+                                </li>
                             <li className="nav-item">
                                 <Link to="/milk" className="nav-link hover-grow" onClick={() => setIsOpen(false)}>
                                     <i className="fas fa-ice-cream me-2"></i> Dairy
@@ -151,28 +159,31 @@ function App() {
             </main>
 
             {/* Footer */}
-                            <footer className="footer">
+            <footer className="footer">
                 <div className="container">
                     <div className="social-icons">
-                    {/* Social media icons */}
+                        <a href="#!" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
+                        <a href="#!" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
+                        <a href="#!" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+                        <a href="#!" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
                     </div>
                     
                     <div className="footer-links">
-                    <Link to="/aboutus" className="mx-3">About Us</Link>
-                    <Link to="/contactus" className="mx-3">Contact Us</Link>
-                    <Link to="/privacy" className="mx-3">Privacy Policy</Link>
-                    <Link to="/terms" className="mx-3">Terms of Service</Link>
+                        <Link to="/aboutus" className="mx-3">About Us</Link>
+                        <Link to="/contactus" className="mx-3">Contact Us</Link>
+                        <Link to="/privacy" className="mx-3">Privacy Policy</Link>
+                        <Link to="/terms" className="mx-3">Terms of Service</Link>
                     </div>
 
                     <p className="mt-3">
-                    © {new Date().getFullYear()} FreshMart. All rights reserved.
+                        © {new Date().getFullYear()} FreshMart. All rights reserved.
                     </p>
                     
                     <p className="text-muted small mt-2">
-                    Made with <i className="fas fa-heart text-danger"></i> for fresh food
+                        Made with <i className="fas fa-heart text-danger"></i> for fresh food
                     </p>
                 </div>
-                </footer>
+            </footer>
         </BrowserRouter>
     );
 }
